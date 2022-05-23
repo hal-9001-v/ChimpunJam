@@ -26,15 +26,18 @@ public class CharacterMovementController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(_charInput.GetMovementVector());
+        //Damp movement & Generate Movement Vector
         _moveDelta = Vector2.SmoothDamp(_moveDelta, _charInput.GetMovementVector(), ref _smoothedInput, smoothInputSpeed);
         Vector3 moveVector = _moveDelta * walkingVelocity * Time.deltaTime;
+        
+        //Move rb
         movementRigidbody.velocity = new Vector3(moveVector.x, movementRigidbody.velocity.y, moveVector.y);
+        
+        //Rotate in moveDirection
         if (_charInput.GetMovementVector() != Vector2.zero){
             Vector3 movDir = movementRigidbody.velocity.normalized;
             Quaternion rot = Quaternion.LookRotation(movDir, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, rotationSpeed * Time.deltaTime);
-
         }
     }
 
