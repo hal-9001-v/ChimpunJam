@@ -6,26 +6,60 @@ public class SeeThroughScript : MonoBehaviour
 {
     public static int PosID = Shader.PropertyToID("_Player_Position");
     public static int SizeID = Shader.PropertyToID("_Size");
-    [SerializeField] Material WallMaterial;
+    [SerializeField] Material[] WallMaterial;
     [SerializeField] LayerMask Mask;
 
     [SerializeField][Range(0f, 2f)] float _size;
     Camera _camera;
-    private void Awake() {
+    
+    [SerializeField] float _totalTimer;
+    private float _elapsedTime;
+    private float _finalSize;
+
+    private void Awake()
+    {
         _camera = FindObjectOfType<Camera>();
     }
-    private void Update() {
+    private void Update()
+    {
         var dir = _camera.transform.position - transform.position;
         var ray = new Ray(transform.position, dir.normalized);
-        
-        if (Physics.Raycast(ray,  3000f, Mask))
-            WallMaterial.SetFloat(SizeID, _size);
+
+        if (Physics.Raycast(ray, 3000f, Mask))
+        {
+            if (_elapsedTime <= _totalTimer)
+            {
+                foreach (Material m in WallMaterial)
+                {
+                    m.SetFloat(SizeID, Mathf.Lerp(_size, 0f, 1 - (_elapsedTime / _totalTimer)));
+                }
+                _elapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                foreach (Material m in WallMaterial)
+                {
+                    m.SetFloat(SizeID, _size);
+                }
+            }
+        }
         else
-            WallMaterial.SetFloat(SizeID, 0f);    
-        
+        {
+            foreach (Material m in WallMaterial)
+            {
+                m.SetFloat(SizeID, 0f);
+            }
+            _elapsedTime = 0;
+
+        }
+
+
         var view = _camera.WorldToViewportPoint(transform.position);
-        WallMaterial.SetVector(PosID, view);
-    
+        foreach (Material m in WallMaterial)
+        {
+            m.SetVector(PosID, view);
+        }
+
     }
 
 }
