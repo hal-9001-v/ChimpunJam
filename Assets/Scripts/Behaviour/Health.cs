@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
     {
         if (canGetHurt)
         {   
-            Debug.Log("HIT");
+            //Debug.Log("HIT");
             currentHealth -= Mathf.Abs(dmg);
 
             if (currentHealth > 0)
