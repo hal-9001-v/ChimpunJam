@@ -46,6 +46,7 @@ public class CharaterInputComponent : MonoBehaviour
     }
 
     private void DuckAbility(){
+        CameraShaker.Instance.ShakeCam(5f, 5f, .3f);
         Debug.Log("Duck Pium");
     }
 
