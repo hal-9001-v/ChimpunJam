@@ -9,19 +9,16 @@ public class FollowObject : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] [Range(0.1f, 10)] float _speed;
+    [SerializeField] [Range(0.1f, 10)] float _minDistance;
 
     float _minMagnitudeDistance;
 
     private void Awake()
     {
-        if (_target)
-        {
-            _minMagnitudeDistance = Vector3.Magnitude(_target.position - transform.position);
-            _minMagnitudeDistance *= _minMagnitudeDistance;
-        }
+        _minMagnitudeDistance = _minDistance * _minDistance;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdatePosition();
     }
@@ -33,8 +30,14 @@ public class FollowObject : MonoBehaviour
             Vector3 direction = _target.position - transform.position;
             if (direction.magnitude > _minMagnitudeDistance + 0.1f)
             {
-                transform.position += direction.normalized * _speed * Time.fixedDeltaTime;
+                transform.position += direction.normalized * _speed * Time.deltaTime;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _minDistance);
     }
 }

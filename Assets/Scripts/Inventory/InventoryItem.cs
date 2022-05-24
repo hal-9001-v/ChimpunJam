@@ -5,8 +5,10 @@ using UnityEngine;
 public class InventoryItem : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] ItemEffect _effect;
     [SerializeField] AnimationCurve _rotationHeight;
     [SerializeField] [Range(0.1f, 5)] float _lerpSpeed;
+
 
     FollowObject _follow;
 
@@ -17,6 +19,14 @@ public class InventoryItem : MonoBehaviour
     float _lerpTargetTime;
     float _lerpElapsedTime;
 
+
+    public void UseItem()
+    {
+        if (_effect)
+        {
+            _effect.ApplyEffect();
+        }
+    }
 
     public void SetFollower(FollowObject follow, bool useHeightCurve)
     {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,6 @@ public class Inventory : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] FollowObject[] _followers;
-    [SerializeField] InventoryItem[] _items;
 
     Queue<InventoryItem> _itemQueue;
 
@@ -19,19 +17,8 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        _itemQueue = new Queue<InventoryItem>();
-
-        for (int i = 0; i < _items.Length; i++)
-        {
-            _itemQueue.Enqueue(_items[i]);
-        }
-
-        for (int i = 0; i < _items.Length; i++)
-        {
-            _items[i].SetFollower(_followers[i], false);
-        }
+        _itemQueue = new();
     }
-
 
     [ContextMenu("Use Item")]
     public void UseItem()
@@ -40,26 +27,49 @@ public class Inventory : MonoBehaviour
         {
             var firstItem = _itemQueue.Dequeue();
 
-            //firstItem.use();
+            firstItem.UseItem();
 
             _itemQueue.Enqueue(firstItem);
 
-            var queueArray = _itemQueue.ToArray();
-            for (int i = 0; i < _followers.Length - 1; i++)
-            {
-                queueArray[i].SetFollower(_followers[i], false);
-            }
-            queueArray[_followers.Length - 1].SetFollower(_followers[_followers.Length - 1], true);
+            AssignFollowersToItems();
+
             _readyToUseItem = false;
             _elapsedCooldown = 0;
         }
     }
 
 
+    public void AddItem(InventoryItem newItem)
+    {
+        if (_itemQueue.Count >= _followers.Length)
+        {
+            var oldItem = _itemQueue.Dequeue();
+            oldItem.gameObject.SetActive(false);
+
+            Destroy(oldItem);
+        }
+
+        _itemQueue.Enqueue(newItem);
+        AssignFollowersToItems();
+    }
+
+    void AssignFollowersToItems()
+    {
+        var queueArray = _itemQueue.ToArray();
+        for (int i = 0; i < queueArray.Length - 1; i++)
+        {
+            queueArray[i].SetFollower(_followers[i], false);
+        }
+        queueArray[queueArray.Length - 1].SetFollower(_followers[queueArray.Length - 1], true);
+
+    }
+
     private void Update()
     {
         UpdateUseTime();
     }
+
+
 
     void UpdateUseTime()
     {
