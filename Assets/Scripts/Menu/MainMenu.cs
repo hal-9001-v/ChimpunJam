@@ -11,12 +11,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Button tutorialButton;
     [SerializeField] Button quit;
 
-    private LevelLoader _levelLoader;
-    private AudioManager _audioManager;
     private void Awake()
     {
-        _levelLoader = FindObjectOfType<LevelLoader>();
-        _audioManager = FindObjectOfType<AudioManager>();
         InitializeButtons();
     }
 
@@ -28,11 +24,11 @@ public class MainMenu : MonoBehaviour
         });
         settingsButton.onClick.AddListener(() =>
        {
-
+           DisplaySettings();
        });
         tutorialButton.onClick.AddListener(() =>
        {
-
+           DisplayTutorial();
        });
         quit.onClick.AddListener(() =>
        {
@@ -42,12 +38,12 @@ public class MainMenu : MonoBehaviour
 
     private void Play()
     {
-        _levelLoader.LoadLevel(1);
+        LevelLoader.Instance.LoadLevel(1);
     }
 
     private void DisplaySettings()
     {
-
+        SettingsManager.Instance.DisplaySettings();
     }
 
     private void DisplayTutorial()

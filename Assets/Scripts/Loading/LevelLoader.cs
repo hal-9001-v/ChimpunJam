@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    static LevelLoader _loader;
+    public static LevelLoader Instance { get; private set; }
     private Slider slider;
     private Animator loadingAnimator;
 
@@ -16,13 +16,13 @@ public class LevelLoader : MonoBehaviour
 
     private void Awake()
     {
-        if (_loader)
+        if (Instance)
         {
             DestroyImmediate(gameObject);
         }
         else
         {
-            _loader = this;
+            Instance = this;
 
             DontDestroyOnLoad(this);
             slider = GetComponentInChildren<Slider>();

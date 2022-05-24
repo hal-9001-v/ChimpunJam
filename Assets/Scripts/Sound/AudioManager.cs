@@ -5,16 +5,16 @@ using UnityEngine.Audio;
 using System;
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
-    public Sound[] sounds;
+    public static AudioManager Instance { get; private set; }
     [SerializeField] AudioMixerGroup music;
     [SerializeField] AudioMixerGroup sfx;
+    public Sound[] sounds;
 
         private void Awake()
     {
         //Singleton AudioManager
-        if(instance == null) {
-            instance = this;
+        if(Instance == null) {
+            Instance = this;
             DontDestroyOnLoad(this.gameObject);
         } else Destroy(this.gameObject);
 
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.soundName == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour
 
     public void Pause(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.soundName == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name);
         s.time = s.audioSource.time;
         if (s == null)
         {
@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
 
     public void Resume(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.soundName == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
                 {
                     Debug.LogWarning("Sound: " + name + " not found!");
@@ -71,7 +71,7 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.soundName == name);
+        Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
