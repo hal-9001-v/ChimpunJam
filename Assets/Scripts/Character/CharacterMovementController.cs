@@ -34,11 +34,10 @@ public class CharacterMovementController : MonoBehaviour
         {
 
             Vector2 targetVelocity = moveDirection.normalized * walkingVelocity;
-            Vector3 fixedVelocity = new Vector3(targetVelocity.x, movementRigidbody.velocity.y, targetVelocity.y) - movementRigidbody.velocity;
-
+            Vector3 fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
+            fixedVelocity.y = 0f;
             //Move rb
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
-
 
             Vector3 movDir = movementRigidbody.velocity.normalized;
             Quaternion rot = Quaternion.LookRotation(movDir, Vector3.up);
@@ -47,7 +46,7 @@ public class CharacterMovementController : MonoBehaviour
         else
         {
             Vector3 fixedVelocity = -friction * movementRigidbody.velocity;
-
+            fixedVelocity.y = 0f;
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
         }
 
@@ -62,7 +61,8 @@ public class CharacterMovementController : MonoBehaviour
                 _isDashing = false;
             }
 
-            Vector3 fixedVelocity = new Vector3(targetVelocity.x, movementRigidbody.velocity.y, targetVelocity.y) - movementRigidbody.velocity;
+            Vector3 fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
+            fixedVelocity.y = 0f;
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
         }
 
