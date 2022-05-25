@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: bdb2d7c9cb21560488e49eb6839ba252
+guid: f361425d857e2984ca5eb744c088cf6b
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 1480649517055656654
+    second: Armature|KnightAttacking
+  - first:
+      74: 3063717265484647567
+    second: Armature|KnightRunning
+  - first:
+      74: -3828583913261678786
+    second: Armature|Running
   externalObjects: {}
   materials:
     materialImportMode: 2
