@@ -7,11 +7,11 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Health))]
 public abstract class Enemy : MonoBehaviour
 {
+    [SerializeField] private Collider[] _colliders;
     protected Navigator _navigator => GetComponent<Navigator>();
     protected Rigidbody _rigidBody => GetComponent<Rigidbody>();
-
     public Health health => GetComponent<Health>();
-
+    
     public void EnableEnemy()
     {
         _navigator.EnableNavigator();
@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
             renderer.enabled = true;
         }
 
-        foreach (Collider collider in GetComponentsInChildren<Collider>())
+        foreach (Collider collider in _colliders)
         {
             collider.enabled = true;
         }
@@ -38,12 +38,15 @@ public abstract class Enemy : MonoBehaviour
             renderer.enabled = false;
         }
 
-        foreach (Collider collider in GetComponentsInChildren<Collider>())
+        foreach (Collider collider in _colliders)
         {
             collider.enabled = false;
         }
 
         _rigidBody.useGravity = false;
     }
+
+
+
 
 }

@@ -58,6 +58,11 @@ public class Health : MonoBehaviour
 
     }
 
+    [ContextMenu("Matar")]
+    public void Kill(){
+        Hurt(1000, transform.position, 1000f, transform);
+    }
+
 
 
 }

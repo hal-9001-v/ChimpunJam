@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Melee))]
@@ -15,11 +17,14 @@ public class MeleeEnemy : Enemy
     [SerializeField] [Range(0.1f, 1)] float _attackDuration;
     [SerializeField] [Range(0.1f, 1)] float _afterAttackTime;
 
+    [Header("References")]
+    [SerializeField] int vfx;
     Health _health => GetComponent<Health>();
     Melee _melee => GetComponent<Melee>();
 
     EnemyTarget _target => FindObjectOfType<EnemyTarget>();
 
+    protected RagdollMaker _ragdollMaker => GetComponentInChildren<RagdollMaker>();
 
     bool _isAttacking;
     Coroutine _attackCoroutine;
@@ -45,7 +50,7 @@ public class MeleeEnemy : Enemy
             }
 
         }
-    }
+    } 
 
     void Attack()
     {
@@ -74,7 +79,7 @@ public class MeleeEnemy : Enemy
 
         _isAttacking = false;
 
-    }
+    } 
 
     void Hurt(Vector3 source, float push, Transform hitter)
     {
@@ -83,7 +88,10 @@ public class MeleeEnemy : Enemy
 
     void Die(Vector3 source, float push, Transform hitter)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        _ragdollMaker.EnableRagdoll(true);
+
+        
     }
 
     private void OnDrawGizmos()

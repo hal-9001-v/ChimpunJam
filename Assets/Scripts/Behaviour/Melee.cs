@@ -7,7 +7,7 @@ using System;
 public class Melee : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Collider[] _attackColliders;
+    [SerializeField] Collider _attackColliders;
 
     // Cuando colidee cosa de melee con cosa de health se llama a hurt()
     [Header("Hit Values")]
@@ -15,13 +15,6 @@ public class Melee : MonoBehaviour
     [SerializeField] [Range(0, 10)] private float _push;
     public Action hitAction;
 
-    private void Awake()
-    {
-        if (_attackColliders == null || _attackColliders.Length == 0)
-        {
-            _attackColliders = GetComponentsInChildren<Collider>();
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,10 +39,7 @@ public class Melee : MonoBehaviour
     {
         if (_attackColliders != null)
         {
-            foreach (var collider in _attackColliders)
-            {
-                collider.enabled = value;
-            }
+           _attackColliders.enabled = true;
         }
     }
 

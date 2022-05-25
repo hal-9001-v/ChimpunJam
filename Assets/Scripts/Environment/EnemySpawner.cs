@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     {
         SpawnEnemy(null);
     }
-
+    
     public void SpawnEnemy(Action deadAction)
     {
         var clone = _enemyProvider.GetRandomEnemy();
