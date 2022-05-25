@@ -8,14 +8,12 @@ public class Health : MonoBehaviour
     [Header("Values")]
     [SerializeField][Range(0, 10)] float _maxHealth;
 
-
     public bool canGetHurt = true;
     public float currentHealth;
 
     public Action<Vector3, float, Transform> hurtAction;
     public Action<Vector3, float, Transform> deadAction;
-
-
+    
     public bool isAlive
     {
         get
