@@ -87,4 +87,6 @@ public class ShooterEnemy : Enemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _attackRange);
     }
+
+
 }

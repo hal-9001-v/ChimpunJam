@@ -8,8 +8,9 @@ using System;
 public class Navigator : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField][Range(0.01f, 1)] float _reachingDistance = 0.1f;
-    [SerializeField][Range(0.01f, 10)] float _warpDistance = 1f;
+    [SerializeField] [Range(0.01f, 1)] float _reachingDistance = 0.1f;
+    [SerializeField] [Range(0.01f, 10)] float _warpDistance = 1f;
+    [SerializeField] [Range(0.1f, 1)] float _refreshTime;
 
 
     public Vector3 velocity
@@ -29,6 +30,8 @@ public class Navigator : MonoBehaviour
     //Used for an specific position with no changes
     Vector3 _targetPosition;
 
+    float _refreshElapsedTime;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,17 +39,30 @@ public class Navigator : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
         _rigidbody.isKinematic = true;
+
+
     }
 
     private void FixedUpdate()
     {
-        if (_navMeshAgent.isOnNavMesh == false && _navMeshAgent.enabled)
+        if (_refreshElapsedTime > _refreshTime)
         {
-            WarpAgent();
+            _refreshElapsedTime = 0;
+
+            if (_navMeshAgent.isOnNavMesh == false && _navMeshAgent.enabled)
+            {
+                WarpAgent();
+            }
+
+            if (_navMeshAgent.enabled && _navMeshAgent.isOnNavMesh)
+                _navMeshAgent.SetDestination(_targetPosition);
+        }
+        else
+        {
+            _refreshElapsedTime += Time.fixedDeltaTime;
         }
 
-        if (_navMeshAgent.enabled)
-            _navMeshAgent.SetDestination(_targetPosition);
+
     }
 
     public void DisableNavigator()

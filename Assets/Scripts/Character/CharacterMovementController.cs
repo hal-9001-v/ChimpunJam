@@ -45,8 +45,6 @@ public class CharacterMovementController : MonoBehaviour
 
             //Move rb
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
-            movementRigidbody.velocity = new Vector3(targetVelocity.x, movementRigidbody.velocity.y, targetVelocity.y);
-
 
             Vector3 movDir = movementRigidbody.velocity.normalized;
             Quaternion rot = Quaternion.LookRotation(movDir, Vector3.up);
