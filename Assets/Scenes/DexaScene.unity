@@ -1129,7 +1129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721081457}
   m_LocalRotation: {x: 0.2949577, y: 0, z: 0, w: 0.9555103}
-  m_LocalPosition: {x: 3.5035772, y: 7.618987, z: -3.124678}
+  m_LocalPosition: {x: 2.398227, y: 7.972338, z: -4.140247}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1866,6 +1866,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1190513922378843054, guid: a9057ae5efc17b64495688fd66e35ae8,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6845081
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190513922378843054, guid: a9057ae5efc17b64495688fd66e35ae8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6845081
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190513922378843054, guid: a9057ae5efc17b64495688fd66e35ae8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6845081
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190513922378843054, guid: a9057ae5efc17b64495688fd66e35ae8,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2181,17 +2196,17 @@ PrefabInstance:
     - target: {fileID: 740925068549841788, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5035772
+      value: 2.398227
       objectReference: {fileID: 0}
     - target: {fileID: 740925068549841788, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.618987
+      value: 7.972338
       objectReference: {fileID: 0}
     - target: {fileID: 740925068549841788, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.124678
+      value: -4.140247
       objectReference: {fileID: 0}
     - target: {fileID: 740925068549841788, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}
