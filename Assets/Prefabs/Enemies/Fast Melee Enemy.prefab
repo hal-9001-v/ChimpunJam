@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 2684979299273903147}
   - component: {fileID: 2684979299273903146}
   m_Layer: 0
-  m_Name: Melee Enemy
+  m_Name: Fast Melee Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ NavMeshAgent:
   m_Height: 1.0000004
   m_BaseOffset: 0.5000002
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!54 &2684979299273903149
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reachingDistance: 0.1
   _warpDistance: 1
+  _refreshTime: 0.5
 --- !u!114 &2684979299273903147
 MonoBehaviour:
   m_ObjectHideFlags: 0
