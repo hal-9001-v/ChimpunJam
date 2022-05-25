@@ -16,7 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftHand' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -24,7 +25,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -80,7 +81,92 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: knight(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cube
+      parentName: knight(Clone)
+      position: {x: 0.00048659137, y: 0, z: -0.0010340622}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Armature
+      parentName: knight(Clone)
+      position: {x: -0, y: 0.20987794, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 12.641828, y: 12.641828, z: 12.641828}
+    - name: Main
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 0.99999976, z: 0.99999976}
+    - name: Head
+      parentName: Main
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: -0, y: -0.00000008940697, z: 0.44612476, w: 0.89497083}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Arm-R
+      parentName: Head
+      position: {x: -0.012956928, y: 0.0024878585, z: -1.4733986e-10}
+      rotation: {x: 0.00000029907164, y: -0.00000035987668, z: 0.45611918, w: 0.8899188}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Arm.R.2
+      parentName: Arm-R
+      position: {x: 5.960467e-10, y: 0.0080486545, z: -9.414691e-16}
+      rotation: {x: -0.000000114772575, y: -0.00000012339625, z: -0.11510636, w: 0.9933532}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Arm.R.2_end
+      parentName: Arm.R.2
+      position: {x: -0, y: 0.011209601, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Arm.L
+      parentName: Head
+      position: {x: 0.012845261, y: 0.0024878585, z: -5.461115e-10}
+      rotation: {x: -0.0000014780452, y: -0.00000071601454, z: -0.8892339, w: 0.45745295}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Arm.L.2
+      parentName: Arm.L
+      position: {x: 7.450482e-11, y: 0.0080486545, z: 2.1671554e-15}
+      rotation: {x: -0.00000047727184, y: 0.0000001772586, z: -0.11519118, w: 0.9933434}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Arm.L.2_end
+      parentName: Arm.L.2
+      position: {x: -0, y: 0.011209601, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg.L
+      parentName: Main
+      position: {x: 0.0071910354, y: 0.0029079395, z: -5.4611143e-10}
+      rotation: {x: 0.000001442502, y: -0, z: 0.9999942, w: -0.003393259}
+      scale: {x: 1.0011173, y: 1.0000008, z: 1.0000001}
+    - name: Leg.L.2
+      parentName: Leg.L
+      position: {x: 4.4237738e-10, y: 0.010861918, z: -1.7053025e-15}
+      rotation: {x: -0.000000025029827, y: -0.00000029127193, z: -0.016666405, w: 0.9998611}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999994}
+    - name: Leg.L.2_end
+      parentName: Leg.L.2
+      position: {x: -0, y: 0.0066500204, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg.R
+      parentName: Main
+      position: {x: -0.0071520815, y: 0.0029079395, z: -5.4611143e-10}
+      rotation: {x: 0.000001442502, y: -0, z: 0.9999942, w: -0.003393259}
+      scale: {x: 1.0011173, y: 1.0000008, z: 1.0000001}
+    - name: Leg.R.2
+      parentName: Leg.R
+      position: {x: -1.5366904e-10, y: 0.01086192, z: 5.684342e-16}
+      rotation: {x: -0.000000025029827, y: -0.00000029127193, z: -0.016666405, w: 0.9998611}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999994}
+    - name: Leg.R.2_end
+      parentName: Leg.R.2
+      position: {x: -0, y: 0.0066500204, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -91,13 +177,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
