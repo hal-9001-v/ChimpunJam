@@ -6,6 +6,6 @@ public class GnomeEffect : ItemEffect
 {
     public override void ApplyEffect()
     {
-        
+        Debug.Log("Gnome");
     }
 }

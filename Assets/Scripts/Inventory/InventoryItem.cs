@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InventoryItem : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] ItemEffect _effect;
     [SerializeField] AnimationCurve _rotationHeight;
     [SerializeField] [Range(0.1f, 5)] float _lerpSpeed;
 
+    ItemEffect _effect => GetComponent<ItemEffect>();
 
     FollowObject _follow;
 

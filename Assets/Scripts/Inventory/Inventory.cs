@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     [ContextMenu("Use Item")]
     public void UseItem()
     {
-        if (_readyToUseItem)
+        if (_readyToUseItem && _itemQueue.Count != 0)
         {
             var firstItem = _itemQueue.Dequeue();
 

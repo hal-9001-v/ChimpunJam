@@ -8,6 +8,8 @@ public class CharaterInputComponent : MonoBehaviour
     private Vector2 _movementInputVector;
     private Vector2 _swordInputVector;
 
+    private Inventory _inventory => FindObjectOfType<Inventory>();
+
 
     private void OnEnable()
     {
@@ -46,8 +48,10 @@ public class CharaterInputComponent : MonoBehaviour
     }
 
     private void DuckAbility(){
-        CameraShaker.Instance.ShakeCam(5f, 5f, .3f);
-        Debug.Log("Duck Pium");
+        //CameraShaker.Instance.ShakeCam(5f, 5f, .3f);
+
+        _inventory.UseItem();
+        
     }
 
     private void FollowerAbility(){

@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0077bc785020e354f98971a91689e598, type: 2}
+  - {fileID: 2100000, guid: ab4f17ea2462e1443ae581bb3bbb9e78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,10 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6013558594676674909}
-  - component: {fileID: 6013558594676674908}
   - component: {fileID: 6013558594676674911}
+  - component: {fileID: -3148154882381099782}
   m_Layer: 0
-  m_Name: Train Prototype
+  m_Name: BabyDuck Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,18 +117,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6013558594676674908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013558594676674906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f247df3e1a46cb498e058fdbe7ce62c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6013558594676674911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2ddfbc38bb46940bfcfb60cc40334c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 6013558594676674908}
   _rotationHeight:
     serializedVersion: 2
     m_Curve:
@@ -176,3 +163,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _lerpSpeed: 1
+--- !u!114 &-3148154882381099782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013558594676674906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8f6460c1b75c64b831f0392641f925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

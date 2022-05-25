@@ -135,7 +135,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6136581764916732865}
         m_TargetAssemblyTypeName: Projectile, Assembly-CSharp
-        m_MethodName: DestroyMe
+        m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
