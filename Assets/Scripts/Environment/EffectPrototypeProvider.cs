@@ -8,7 +8,8 @@ public class EffectPrototypeProvider : MonoBehaviour
     [SerializeField] InventoryItem _trainPrototype;
     [SerializeField] InventoryItem _gnomePrototype;
     [SerializeField] InventoryItem _babyDuckPrototype;
-    [SerializeField] InventoryItem _humanBabyPrototype;
+    [SerializeField] InventoryItem _explosionPrototype;
+    [SerializeField] InventoryItem _ballPrototype;
     [SerializeField] InventoryItem _frenchPrototype;
 
 
@@ -33,9 +34,9 @@ public class EffectPrototypeProvider : MonoBehaviour
         return clone;
     }
 
-    public InventoryItem CloneHumanBabyPrototype()
+    public InventoryItem CloneExplosionPrototype()
     {
-        var clone = Instantiate(_humanBabyPrototype);
+        var clone = Instantiate(_explosionPrototype);
 
         return clone;
     }
@@ -47,11 +48,18 @@ public class EffectPrototypeProvider : MonoBehaviour
         return clone;
     }
 
+    public InventoryItem CloneBallItem()
+    {
+        var clone = Instantiate(_ballPrototype);
+
+        return clone;
+    }
+
 
     public InventoryItem GetRandomItem()
     {
         InventoryItem clone = null;
-        switch (Random.Range(0, 5))
+        switch (Random.Range(0, 6))
         {
             case 0:
                 clone = CloneTrainItem();
@@ -64,10 +72,14 @@ public class EffectPrototypeProvider : MonoBehaviour
                 clone = CloneBabyDuckItem();
                 break;
             case 3:
-                clone = CloneHumanBabyPrototype();
+                clone = CloneExplosionPrototype();
                 break;
             case 4:
                 clone = CloneFrenchRobot();
+                break;
+
+            case 5:
+                clone = CloneBallItem();
                 break;
             default:
 

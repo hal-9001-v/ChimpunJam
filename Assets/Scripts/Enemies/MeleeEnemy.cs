@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(Melee))]
+[RequireComponent(typeof(Hurter))]
 public class MeleeEnemy : Enemy
 {
     
@@ -20,7 +20,7 @@ public class MeleeEnemy : Enemy
     [Header("References")]
     [SerializeField] int vfx;
     Health _health => GetComponent<Health>();
-    Melee _melee => GetComponent<Melee>();
+    Hurter _melee => GetComponent<Hurter>();
 
     EnemyTarget _target => FindObjectOfType<EnemyTarget>();
 
