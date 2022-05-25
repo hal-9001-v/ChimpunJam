@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3680163070946510525}
   - component: {fileID: 3680163070946510527}
   - component: {fileID: 3664570055104640151}
+  - component: {fileID: 579975607381699727}
   m_Layer: 0
   m_Name: French Robot Prototype
   m_TagString: Untagged
@@ -46,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2ddfbc38bb46940bfcfb60cc40334c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 6013558594676674908, guid: 48abe27ec01c39841a0e3bca2f0df7db, type: 3}
   _rotationHeight:
     serializedVersion: 2
     m_Curve:
@@ -93,6 +93,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc400303ebfc37044be1621af31dda41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &579975607381699727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680163070946510522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0600f3eb70f323d4d85ad4a549d6c5ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawn: {fileID: 3680163070946510525}
+  _projectilePrefab: {fileID: 6136581764916732865, guid: a5cbddcaa7464e74d81a99c9f61be4a8,
+    type: 3}
+  _numberOfBullets: 3
+  _bulletDelay: 0.2
+  _bulletSpeed: 10
+  _bulletDamage: 2
+  _bulletPush: 2
 --- !u!1 &8498205275247593645
 GameObject:
   m_ObjectHideFlags: 0

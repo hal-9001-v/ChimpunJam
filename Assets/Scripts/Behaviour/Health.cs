@@ -5,6 +5,10 @@ using System;
 
 public class Health : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] HealthTag _healthTag;
+    public HealthTag healthTag { get { return _healthTag; } }
+
     [Header("Values")]
     [SerializeField][Range(0, 10)] float _maxHealth;
 

@@ -4,8 +4,12 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Collider))]
-public class Melee : MonoBehaviour
+public class Hurter : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] HealthTag _targetTag;
+    public HealthTag targetTag { get { return _targetTag; } }
+
     [Header("References")]
     [SerializeField] Collider[] _attackColliders;
 
@@ -14,6 +18,8 @@ public class Melee : MonoBehaviour
     [SerializeField] [Range(0, 10)] private float _damage;
     [SerializeField] [Range(0, 10)] private float _push;
     public Action hitAction;
+
+    bool _collidersActive = true;
 
     private void Awake()
     {
@@ -44,6 +50,9 @@ public class Melee : MonoBehaviour
 
     public void EnableAttackColliders(bool value)
     {
+        if (_collidersActive == value) return;
+
+        _collidersActive = value;
         if (_attackColliders != null)
         {
             foreach (var collider in _attackColliders)

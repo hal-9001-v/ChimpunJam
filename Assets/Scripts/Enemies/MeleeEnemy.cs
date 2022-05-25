@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(Melee))]
+[RequireComponent(typeof(Hurter))]
 public class MeleeEnemy : Enemy
 {
     
@@ -16,7 +16,7 @@ public class MeleeEnemy : Enemy
     [SerializeField] [Range(0.1f, 1)] float _afterAttackTime;
 
     Health _health => GetComponent<Health>();
-    Melee _melee => GetComponent<Melee>();
+    Hurter _melee => GetComponent<Hurter>();
 
     EnemyTarget _target => FindObjectOfType<EnemyTarget>();
 

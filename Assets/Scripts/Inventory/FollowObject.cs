@@ -13,6 +13,8 @@ public class FollowObject : MonoBehaviour
 
     float _minMagnitudeDistance;
 
+    public bool stopFollowing;
+
     private void Awake()
     {
         _minMagnitudeDistance = _minDistance * _minDistance;
@@ -25,6 +27,8 @@ public class FollowObject : MonoBehaviour
 
     void UpdatePosition()
     {
+        if (stopFollowing) return;
+
         if (_target)
         {
             Vector3 direction = _target.position - transform.position;
@@ -33,6 +37,11 @@ public class FollowObject : MonoBehaviour
                 transform.position += direction.normalized * _speed * Time.deltaTime;
             }
         }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 
     private void OnDrawGizmos()
