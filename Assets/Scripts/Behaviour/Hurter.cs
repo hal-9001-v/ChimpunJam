@@ -28,6 +28,8 @@ public class Hurter : MonoBehaviour
         {
             _attackColliders = GetComponentsInChildren<Collider>();
         }
+
+        EnableAttackColliders(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +40,7 @@ public class Hurter : MonoBehaviour
     private void Hit(Transform source, Collider coll, Vector3 pos)
     {
         var health = coll.GetComponent<Health>();
-        if (health)
+        if (health && health.healthTag == _targetTag)
         {
             //Debug.Log("HURT");
             health.Hurt(_damage, pos, _push, source);

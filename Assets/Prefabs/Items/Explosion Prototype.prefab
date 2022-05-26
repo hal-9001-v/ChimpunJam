@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7359104228820611984}
   - component: {fileID: 3073417952819859783}
   - component: {fileID: 2265046922111443504}
+  - component: {fileID: 2645630567793551501}
   m_Layer: 0
   m_Name: Explosion Prototype
   m_TagString: Untagged
@@ -177,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e3848a3a30ed34d99edd996c75642d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionDuration: 0.1
 --- !u!135 &3073417952819859783
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -203,7 +203,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca008a89344aab4daa92bca38920c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetTag: 1
   _attackColliders:
   - {fileID: 3073417952819859783}
   _damage: 5
   _push: 2
+--- !u!114 &2645630567793551501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420758940047048332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63088eee5f835a04ca9f709c12538b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionDuration: 0

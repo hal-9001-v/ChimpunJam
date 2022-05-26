@@ -27,6 +27,7 @@ public abstract class Enemy : MonoBehaviour
         }
 
         _rigidBody.useGravity = true;
+        enabled = true;
     }
 
     public void DisableEnemy()
@@ -44,6 +45,8 @@ public abstract class Enemy : MonoBehaviour
         }
 
         _rigidBody.useGravity = false;
+
+        enabled = false;
     }
 
 

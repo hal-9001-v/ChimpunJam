@@ -10,7 +10,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] bool _auto;
     [SerializeField] Round[] _rounds;
 
-    EnemySpawner[] _spawner => FindObjectsOfType<EnemySpawner>();
+    EnemySpawner[] _spawners => FindObjectsOfType<EnemySpawner>();
 
     public int roundCount { get; private set; }
 
@@ -31,13 +31,13 @@ public class RoundManager : MonoBehaviour
 
     void SpawnEnemies(int number)
     {
-        List<EnemySpawner> spawners = new(_spawner);
+        List<EnemySpawner> spawners = new(_spawners);
 
         for (int i = 0; i < number; i++)
         {
             if (spawners.Count == 0)
             {
-                spawners = new(_spawner);
+                spawners = new(_spawners);
             }
 
             int newIndex = UnityEngine.Random.Range(0, spawners.Count);
