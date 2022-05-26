@@ -6,8 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Shooter))]
 public class ShooterEnemy : Enemy
 {
-    [Header("Settings")]
-    [SerializeField] [Range(1, 20)] float _speed = 10;
+    [Header("Settings")] [SerializeField] [Range(1, 20)]
+    float _speed = 10;
+
     [SerializeField] [Range(0.5f, 10)] float _attackRange = 5;
 
     [SerializeField] [Range(0.1f, 1)] float _shootPreparationTime;
@@ -15,6 +16,10 @@ public class ShooterEnemy : Enemy
     [SerializeField] [Range(1, 5)] int _shootCount;
     [SerializeField] [Range(0.1f, 1)] float _shootDelay;
 
+    [Header("References")] [SerializeField]
+    private VFXPlayer _confettiVFX;
+
+    protected RagdollMaker _ragdollMaker => GetComponentInChildren<RagdollMaker>();
 
     Health _health => GetComponent<Health>();
     Shooter _shooter => GetComponent<Shooter>();
@@ -26,6 +31,7 @@ public class ShooterEnemy : Enemy
 
     private void Awake()
     {
+        _confettiVFX.StopVFX();
         _health.hurtAction += Hurt;
         _health.deadAction += Die;
     }
@@ -43,7 +49,6 @@ public class ShooterEnemy : Enemy
                     Attack();
                 }
             }
-
         }
     }
 
@@ -58,6 +63,10 @@ public class ShooterEnemy : Enemy
         }
     }
 
+    public bool IsAttacking()
+    {
+        return _isAttacking;
+    }
 
     IEnumerator AttackCoroutine()
     {
@@ -69,7 +78,6 @@ public class ShooterEnemy : Enemy
         }
 
         _isAttacking = false;
-
     }
 
     void Hurt(Vector3 source, float push, Transform hitter)
@@ -79,6 +87,15 @@ public class ShooterEnemy : Enemy
 
     void Die(Vector3 source, float push, Transform hitter)
     {
+        StartCoroutine(DieC());
+    }
+
+    IEnumerator DieC()
+    {
+        _ragdollMaker.EnableRagdoll(true);
+        yield return new WaitForSeconds(3f);
+        _confettiVFX.transform.parent = null;
+        _confettiVFX.EnableVFX();
         Destroy(gameObject);
     }
 
@@ -87,6 +104,4 @@ public class ShooterEnemy : Enemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _attackRange);
     }
-
-
 }

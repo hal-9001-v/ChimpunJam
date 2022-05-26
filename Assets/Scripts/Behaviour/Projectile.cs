@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
 
         transform.position = startingPosition;
         _rigidBody.velocity = velocity;
-
+        
         Show();
     }
 
