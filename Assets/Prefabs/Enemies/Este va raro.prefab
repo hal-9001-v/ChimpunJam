@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 2684979299273903147}
   - component: {fileID: 2684979299273903146}
   m_Layer: 0
-  m_Name: Fast Melee Enemy
+  m_Name: Este va raro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
