@@ -29,6 +29,8 @@ public class SwordController : MonoBehaviour
     private void Awake()
     {
         _targetStartingPosition = _ikTarget.localPosition;
+
+        EnableSword(false);
     }
 
     public void EnableSword(bool value)
