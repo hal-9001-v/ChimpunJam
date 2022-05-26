@@ -1528,7 +1528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthTag: 0
-  _maxHealth: 0
+  _maxHealth: 1
   canGetHurt: 1
   currentHealth: 0
 --- !u!195 &8132591540929075273

@@ -6,7 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Shooter))]
 public class ShooterEnemy : Enemy
 {
-    [Header("Settings")] [SerializeField] [Range(1, 20)]
+    [Header("Settings")]
+    [SerializeField]
+    [Range(1, 20)]
     float _speed = 10;
 
     [SerializeField] [Range(0.5f, 10)] float _attackRange = 5;
@@ -16,7 +18,8 @@ public class ShooterEnemy : Enemy
     [SerializeField] [Range(1, 5)] int _shootCount;
     [SerializeField] [Range(0.1f, 1)] float _shootDelay;
 
-    [Header("References")] [SerializeField]
+    [Header("References")]
+    [SerializeField]
     private VFXPlayer _confettiVFX;
 
     protected RagdollMaker _ragdollMaker => GetComponentInChildren<RagdollMaker>();
@@ -49,6 +52,14 @@ public class ShooterEnemy : Enemy
                     Attack();
                 }
             }
+            else
+            {
+                var direction = _target.transform.position - transform.position;
+                direction.y = 0;
+                direction.Normalize();
+
+                transform.forward = Vector3.Lerp(transform.forward, direction, 0.5f);
+            }
         }
     }
 
@@ -60,6 +71,7 @@ public class ShooterEnemy : Enemy
 
             _navigator.Stop();
             _attackCoroutine = StartCoroutine(AttackCoroutine());
+            _rigidBody.velocity = Vector3.zero;
         }
     }
 

@@ -90,12 +90,15 @@ public class Inventory : MonoBehaviour
 
     void AssignFollowersToItems()
     {
-        var queueArray = itemQueue.ToArray();
-        for (int i = 0; i < queueArray.Length - 1; i++)
+        if (itemQueue.Count != 0)
         {
-            queueArray[i].SetFollower(_followers[i], false);
+            var queueArray = itemQueue.ToArray();
+            for (int i = 0; i < queueArray.Length - 1; i++)
+            {
+                queueArray[i].SetFollower(_followers[i], false);
+            }
+            queueArray[queueArray.Length - 1].SetFollower(_followers[queueArray.Length - 1], true);
         }
-        queueArray[queueArray.Length - 1].SetFollower(_followers[queueArray.Length - 1], true);
 
     }
 

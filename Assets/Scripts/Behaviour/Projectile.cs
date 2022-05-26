@@ -10,11 +10,12 @@ public class Projectile : MonoBehaviour
     [Header("Settings")]
     [SerializeField] UnityEvent _onHitHealth;
     [SerializeField] UnityEvent _onHit;
+    [SerializeField] HealthTag _targetTag;
 
     //References
     Rigidbody _rigidBody;
-    Collider _collider;
-    Renderer _renderer;
+    Collider[] _colliders;
+    Renderer[] _renderers;
 
     float _damage = 1;
     float _push = 1;
@@ -24,9 +25,9 @@ public class Projectile : MonoBehaviour
     {
         //Initialize
         _rigidBody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _colliders = GetComponentsInChildren<Collider>();
 
-        _renderer = GetComponent<Renderer>();
+        _renderers = GetComponentsInChildren<Renderer>();
 
 
         //Nullify parent so it doesn't move with hierarchy on any way.
@@ -35,10 +36,15 @@ public class Projectile : MonoBehaviour
         Hide();
     }
 
+    private void Update()
+    {
+        transform.forward = _rigidBody.velocity.normalized;
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         Health health = collision.GetComponent<Health>();
-        if (health != null)
+        if (health != null && health.healthTag == _targetTag)
         {
             health.Hurt(_damage, transform.position, _push, transform);
 
@@ -52,13 +58,14 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector3 startingPosition, Vector3 velocity, float damage, float push)
     {
+        Show();
+
         _damage = damage;
         _push = push;
 
         transform.position = startingPosition;
         _rigidBody.velocity = velocity;
-        
-        Show();
+
     }
 
     public void Launch(Vector3 startingPosition, float velocity, float damage, float push, Transform target)
@@ -68,15 +75,31 @@ public class Projectile : MonoBehaviour
 
     public void Show()
     {
-        _collider.enabled = true;
-        _renderer.enabled = true;
+        _rigidBody.isKinematic = false;
+        foreach (var collider in _colliders)
+        {
+            collider.enabled = true;
+        }
+
+        foreach (var renderer in _renderers)
+        {
+            renderer.enabled = true;
+        }
     }
     public void Hide()
     {
-        _collider.enabled = false;
-        _renderer.enabled = false;
-
+        _rigidBody.isKinematic = true;
         _rigidBody.velocity = Vector3.zero;
+
+        foreach (var collider in _colliders)
+        {
+            collider.enabled = false;
+        }
+
+        foreach (var renderer in _renderers)
+        {
+            renderer.enabled = false;
+        }
     }
 
     public void DestroyMe()

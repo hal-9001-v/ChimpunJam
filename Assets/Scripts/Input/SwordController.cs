@@ -116,13 +116,16 @@ public class SwordController : MonoBehaviour
 
     public void UseEffect()
     {
-        var usedEffect = effects.Dequeue();
-        foreach (var effect in usedEffect.itemEffects)
+        if (effects.Count != 0)
         {
-            effect.ApplyEffect();
-        }
+            var usedEffect = effects.Dequeue();
+            foreach (var effect in usedEffect.itemEffects)
+            {
+                effect.ApplyEffect();
+            }
 
-        effects.Enqueue(usedEffect);
+            effects.Enqueue(usedEffect);
+        }
     }
 
     public class CombinedEffects

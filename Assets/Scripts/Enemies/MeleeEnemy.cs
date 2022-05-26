@@ -58,6 +58,8 @@ public class MeleeEnemy : Enemy
             _isAttacking = true;
 
             _navigator.Stop();
+            _rigidBody.velocity = Vector3.zero;
+
             _attackCoroutine = StartCoroutine(AttackCoroutine());
         }
     }

@@ -146,12 +146,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402812188}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00001, y: -0, z: 0.00464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7733217945759118098}
+  m_Father: {fileID: 5614048316232316791}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6671662118944473194
@@ -186,7 +186,7 @@ Transform:
   m_Children:
   - {fileID: 6276726185914745254}
   m_Father: {fileID: 7733217945759118098}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1700109687
 MonoBehaviour:
@@ -254,7 +254,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1402812189}
   - {fileID: 1624251147704937112}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -300,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa1fb7e8c746fbd4eb2d3f12c96e86d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthTag: 0
-  _maxHealth: 10
+  _healthTag: 1
+  _maxHealth: 1
   canGetHurt: 1
   currentHealth: 0
 --- !u!114 &2009735607
@@ -952,6 +951,12 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &5614048316232316791 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7099701086067224262, guid: 84198e7f29e461943ac87df9f47dff68,
+    type: 3}
+  m_PrefabInstance: {fileID: 5805650404887373389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5670331585541380833 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7052425084191556436, guid: 84198e7f29e461943ac87df9f47dff68,
