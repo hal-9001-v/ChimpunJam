@@ -87,6 +87,7 @@ public class RoundManager : MonoBehaviour
         {
             roundStartAction.Invoke(roundCount);
         }
+
         StartCoroutine(Spawn(currentRound));
 
     }
@@ -96,6 +97,8 @@ public class RoundManager : MonoBehaviour
         for (int i = 0; i < round.waves; i++)
         {
             SpawnEnemies(round.enemiesInWave);
+
+            enemyCount += round.enemiesInWave;
 
             yield return new WaitForSeconds(round.spawnDelay);
         }

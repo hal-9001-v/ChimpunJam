@@ -5,14 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(Shooter))]
 public class FrenchRobotEffect : ItemEffect
 {
+    [SerializeField] Animator _animator;
     Shooter _shooter => GetComponent<Shooter>();
+    CharaterInputComponent _input;
+
+    Vector3 _previousPosition;
+
+    const string ShootTriggerKey = "Shoot";
+    const string WalingBoolKey = "Walking";
 
     public override void ApplyEffect()
     {
-
         var enemies = FindObjectsOfType<Enemy>();
         var closestMagnitude = float.MaxValue;
         Enemy closestEnemy = null;
+
+        _animator.SetTrigger(ShootTriggerKey);
 
         foreach (var enemy in enemies)
         {
@@ -36,6 +44,28 @@ public class FrenchRobotEffect : ItemEffect
         }
 
     }
+
+    private void FixedUpdate()
+    {
+        var direction = transform.position - _previousPosition;
+        if (direction.sqrMagnitude >= 0.1f)
+        {
+            _animator.SetBool(WalingBoolKey, true);
+
+            direction.y = 0;
+
+            direction.Normalize();
+
+            transform.forward = direction;
+
+            _previousPosition = transform.position;
+        }
+        else
+        {
+            _animator.SetBool(WalingBoolKey, false);
+        }
+    }
+
 
 
 }

@@ -5,8 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] FollowObject[] _followers;
-
+    [SerializeField] FollowChain _followChain;
 
     public Queue<InventoryItem> itemQueue;
 
@@ -54,7 +53,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(InventoryItem newItem)
     {
-        if (itemQueue.Count >= _followers.Length)
+        if (itemQueue.Count >= _followChain.slots.Length)
         {
             var oldItem = itemQueue.Dequeue();
             oldItem.gameObject.SetActive(false);
@@ -95,9 +94,9 @@ public class Inventory : MonoBehaviour
             var queueArray = itemQueue.ToArray();
             for (int i = 0; i < queueArray.Length - 1; i++)
             {
-                queueArray[i].SetFollower(_followers[i], false);
+               queueArray[i].SetParent(_followChain.slots[i], false);
             }
-            queueArray[queueArray.Length - 1].SetFollower(_followers[queueArray.Length - 1], true);
+            queueArray[queueArray.Length - 1].SetParent(_followChain.slots[queueArray.Length - 1], true);
         }
 
     }

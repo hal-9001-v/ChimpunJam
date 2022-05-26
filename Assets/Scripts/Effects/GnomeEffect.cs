@@ -77,9 +77,9 @@ public class GnomeEffect : ItemEffect
         _gnomeExploder.Explode();
         _gnomeHider.Show(false);
 
-        _gnomeFollow.transform.position = transform.position;
-        _gnomeFollow.transform.parent = transform;
-        _gnomeFollow.stopFollowing = true;
+       _gnomeFollow.transform.position = transform.position;
+       _gnomeFollow.transform.parent = transform;
+       _gnomeFollow.stopFollowing = true;
     }
 
 

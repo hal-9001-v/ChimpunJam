@@ -105,9 +105,9 @@ public class SwordController : MonoBehaviour
 
     public void AddEffects(ItemEffect[] itemEffects)
     {
-        if (itemEffects.Length != 4)
+        if (itemEffects.Length < 3)
         {
-            Debug.LogWarning("Must be 4! Provided are " + itemEffects.Length);
+            Debug.LogWarning("Must be 3 or more! Provided are " + itemEffects.Length);
             return;
         }
 

@@ -9,6 +9,7 @@ public class InertiaHurter : MonoBehaviour
     [Header("Settings")]
     [SerializeField] HealthTag _targetTag;
 
+    [SerializeField] [Range(1, 10)] float _damage;
     [SerializeField] [Range(1, 20)] float _minimumSpeedForDamage;
     [SerializeField] [Range(1, 20)] float _thrust;
 
@@ -38,12 +39,17 @@ public class InertiaHurter : MonoBehaviour
         var health = collision.collider.gameObject.GetComponent<Health>();
         if (health)
         {
-            if (_targetTag != health.healthTag)
+            if (_targetTag == health.healthTag)
+            {
+                health.Hurt(_damage, transform.position, _thrust, transform);
+            }
+            else
             {
                 var direction = transform.position - health.transform.position;
                 direction.y = 0;
 
                 _rigidbody.AddForce(direction.normalized * _thrust, ForceMode.VelocityChange);
+
             }
         }
     }

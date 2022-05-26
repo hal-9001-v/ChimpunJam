@@ -13,7 +13,7 @@ public class InventoryItem : MonoBehaviour
 
     public ItemEffect effect { get { return _effect; } }
 
-    FollowObject _follow;
+    Transform _followParent;
 
     bool _lerping;
     bool _useHeightCurve;
@@ -31,20 +31,15 @@ public class InventoryItem : MonoBehaviour
         }
     }
 
-    public void SetFollower(FollowObject follow, bool useHeightCurve)
+    public void SetParent(Transform parent, bool useHeightCurve)
     {
-        if (follow)
-        {
-            _follow = follow;
+        _followParent = parent;
+        _lerpStart = transform.position;
+        _lerpTargetTime = Vector3.Distance(_lerpStart, _followParent.transform.position) / _lerpSpeed;
+        _lerpElapsedTime = 0;
 
-            _lerpStart = transform.position;
-            _lerpTargetTime = Vector3.Distance(_lerpStart, follow.transform.position) / _lerpSpeed;
-            _lerpElapsedTime = 0;
-
-            _lerping = true;
-            _useHeightCurve = useHeightCurve;
-
-        }
+        _lerping = true;
+        _useHeightCurve = useHeightCurve;
     }
 
     private void Update()
@@ -58,13 +53,12 @@ public class InventoryItem : MonoBehaviour
             {
                 _lerping = false;
 
-
-                transform.parent = _follow.transform;
-                transform.position = _follow.transform.position;
+                transform.parent = _followParent;
+                transform.position = _followParent.position;
             }
             else
             {
-                transform.position = Vector3.Lerp(_lerpStart, _follow.transform.position, _lerpElapsedTime / _lerpTargetTime);
+                transform.position = Vector3.Lerp(_lerpStart, _followParent.position, _lerpElapsedTime / _lerpTargetTime);
 
                 if (_useHeightCurve)
                 {
