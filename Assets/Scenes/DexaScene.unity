@@ -1649,6 +1649,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7494146434456543953, guid: 91abedc7dc7e7e6409cdd9696c51d6a3, type: 3}
+--- !u!1 &1008175719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7853241699361490918, guid: da052ecadf184ab409ad900ff15baeb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1688994651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1008175723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008175719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 074eb97eff22c6348b6ba92fb5d1186f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1055776045 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1599826595754709761, guid: 91abedc7dc7e7e6409cdd9696c51d6a3,
@@ -2064,6 +2082,16 @@ PrefabInstance:
       propertyPath: _attackColliders.Array.data[0]
       value: 
       objectReference: {fileID: 116213898}
+    - target: {fileID: 2684979299273903147, guid: da052ecadf184ab409ad900ff15baeb8,
+        type: 3}
+      propertyPath: _vfxObject
+      value: 
+      objectReference: {fileID: 1008175723}
+    - target: {fileID: 2684979299273903147, guid: da052ecadf184ab409ad900ff15baeb8,
+        type: 3}
+      propertyPath: _confettiVFX
+      value: 
+      objectReference: {fileID: 1008175723}
     - target: {fileID: 2973164431872159398, guid: da052ecadf184ab409ad900ff15baeb8,
         type: 3}
       propertyPath: m_Layer
@@ -2144,7 +2172,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5105711610871571170, guid: da052ecadf184ab409ad900ff15baeb8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: da052ecadf184ab409ad900ff15baeb8, type: 3}
 --- !u!1 &1753531548 stripped
 GameObject:
@@ -2391,7 +2420,7 @@ PrefabInstance:
     - target: {fileID: 740925068549841789, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7780429
+      value: 1.853211
       objectReference: {fileID: 0}
     - target: {fileID: 740925068549841790, guid: f5178f01e2711ec45abec471a3cc983c,
         type: 3}

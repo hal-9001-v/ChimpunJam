@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -6,23 +7,24 @@ public class VFXPlayer : MonoBehaviour
     private VisualEffect _vfx => GetComponent<VisualEffect>();
 
     private bool _enabled;
+
     private void Update()
     {
-        if (_vfx.aliveParticleCount == 0 && _enabled)
+        if (_enabled)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 3.5f);
         }
     }
 
     public void EnableVFX()
     {
-        _enabled = true;
         _vfx.Play();
+        _enabled = true;
     }
 
     public void StopVFX()
     {
-        _enabled = false;
         _vfx.Stop();
+        _enabled = false;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Hurter))]
@@ -15,7 +16,7 @@ public class MeleeEnemy : Enemy
     [SerializeField] [Range(0.1f, 1)] float _afterAttackTime;
 
     [Header("References")] 
-    [SerializeField] private VFXPlayer _vfxObject;
+    [SerializeField] private VFXPlayer _confettiVFX;
     private Health _health => GetComponent<Health>();
     private Hurter _melee => GetComponent<Hurter>();
 
@@ -29,7 +30,7 @@ public class MeleeEnemy : Enemy
 
     private void Awake()
     {
-        _vfxObject.StopVFX();
+        _confettiVFX.StopVFX();
         _health.hurtAction += Hurt;
         _health.deadAction += Die;
     }
@@ -92,8 +93,8 @@ public class MeleeEnemy : Enemy
     {
         _ragdollMaker.EnableRagdoll(true);
         yield return new WaitForSeconds(3f);
-        _vfxObject.EnableVFX();
-        _vfxObject.transform.parent = null;
+        _confettiVFX.transform.parent = null;
+        _confettiVFX.EnableVFX();
         Destroy(gameObject);
     }
 
