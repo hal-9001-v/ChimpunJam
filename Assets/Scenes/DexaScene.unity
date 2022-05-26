@@ -415,6 +415,12 @@ MonoBehaviour:
     type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+--- !u!135 &116213898 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2684979298043949721, guid: da052ecadf184ab409ad900ff15baeb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1688994651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &155720181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1904,10 +1910,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 592734796, guid: a9057ae5efc17b64495688fd66e35ae8, type: 3}
-      propertyPath: m_Weight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1190513922378843049, guid: a9057ae5efc17b64495688fd66e35ae8,
         type: 3}
       propertyPath: m_Name
@@ -2057,6 +2059,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2684979299273903146, guid: da052ecadf184ab409ad900ff15baeb8,
+        type: 3}
+      propertyPath: _attackColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 116213898}
     - target: {fileID: 2973164431872159398, guid: da052ecadf184ab409ad900ff15baeb8,
         type: 3}
       propertyPath: m_Layer

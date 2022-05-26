@@ -1,26 +1,24 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Hurter))]
 public class MeleeEnemy : Enemy
 {
-    
-    [Header("Settings")]
-    [SerializeField] [Range(1, 20)] float _speed = 10;
+    [Header("Settings")] [SerializeField] [Range(1, 20)]
+    float _speed = 10;
+
     [SerializeField] [Range(0.5f, 5)] float _attackRange = 1;
 
     [SerializeField] [Range(0.1f, 1)] float _attackPreparationTime;
     [SerializeField] [Range(0.1f, 1)] float _attackDuration;
     [SerializeField] [Range(0.1f, 1)] float _afterAttackTime;
 
-    [Header("References")]
-    [SerializeField] int vfx;
-    Health _health => GetComponent<Health>();
-    Hurter _melee => GetComponent<Hurter>();
+    [Header("References")] 
+    [SerializeField] private VFXPlayer _vfxObject;
+    private Health _health => GetComponent<Health>();
+    private Hurter _melee => GetComponent<Hurter>();
+
 
     EnemyTarget _target => FindObjectOfType<EnemyTarget>();
 
@@ -31,6 +29,7 @@ public class MeleeEnemy : Enemy
 
     private void Awake()
     {
+        _vfxObject.StopVFX();
         _health.hurtAction += Hurt;
         _health.deadAction += Die;
     }
@@ -48,9 +47,8 @@ public class MeleeEnemy : Enemy
                     Attack();
                 }
             }
-
         }
-    } 
+    }
 
     void Attack()
     {
@@ -63,13 +61,12 @@ public class MeleeEnemy : Enemy
         }
     }
 
-  
+
     IEnumerator AttackCoroutine()
     {
-
         yield return new WaitForSeconds(_attackPreparationTime);
 
-        
+
         _melee.EnableAttackColliders(true);
         yield return new WaitForSeconds(_attackDuration);
         _melee.EnableAttackColliders(false);
@@ -78,9 +75,8 @@ public class MeleeEnemy : Enemy
         yield return new WaitForSeconds(_afterAttackTime);
 
         _isAttacking = false;
-
-    } 
-
+    }
+    
     void Hurt(Vector3 source, float push, Transform hitter)
     {
         //Oof
@@ -89,9 +85,16 @@ public class MeleeEnemy : Enemy
     void Die(Vector3 source, float push, Transform hitter)
     {
         //Destroy(gameObject);
-        _ragdollMaker.EnableRagdoll(true);
+        StartCoroutine(DieC());
+    }
 
-        
+    IEnumerator DieC()
+    {
+        _ragdollMaker.EnableRagdoll(true);
+        yield return new WaitForSeconds(3f);
+        _vfxObject.EnableVFX();
+        _vfxObject.transform.parent = null;
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
