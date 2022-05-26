@@ -62,6 +62,15 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseSword"",
+                    ""type"": ""Button"",
+                    ""id"": ""b92d6ed8-6c52-4a05-a9ec-843cb02bb08b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,28 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
                     ""action"": ""DuckAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdef46d6-0db8-41fa-9f8e-6111d2304eea"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSword"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f0d89a8-6062-4f61-9b1d-0a52e29eeb5a"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSword"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -214,6 +245,7 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
         m_CharacterControllerActionMap_Ability = m_CharacterControllerActionMap.FindAction("Ability", throwIfNotFound: true);
         m_CharacterControllerActionMap_Sword2DVec = m_CharacterControllerActionMap.FindAction("Sword2DVec", throwIfNotFound: true);
         m_CharacterControllerActionMap_DuckAbility = m_CharacterControllerActionMap.FindAction("DuckAbility", throwIfNotFound: true);
+        m_CharacterControllerActionMap_UseSword = m_CharacterControllerActionMap.FindAction("UseSword", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -277,6 +309,7 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControllerActionMap_Ability;
     private readonly InputAction m_CharacterControllerActionMap_Sword2DVec;
     private readonly InputAction m_CharacterControllerActionMap_DuckAbility;
+    private readonly InputAction m_CharacterControllerActionMap_UseSword;
     public struct CharacterControllerActionMapActions
     {
         private @CharacterMovement m_Wrapper;
@@ -285,6 +318,7 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
         public InputAction @Ability => m_Wrapper.m_CharacterControllerActionMap_Ability;
         public InputAction @Sword2DVec => m_Wrapper.m_CharacterControllerActionMap_Sword2DVec;
         public InputAction @DuckAbility => m_Wrapper.m_CharacterControllerActionMap_DuckAbility;
+        public InputAction @UseSword => m_Wrapper.m_CharacterControllerActionMap_UseSword;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControllerActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +340,9 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
                 @DuckAbility.started -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnDuckAbility;
                 @DuckAbility.performed -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnDuckAbility;
                 @DuckAbility.canceled -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnDuckAbility;
+                @UseSword.started -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnUseSword;
+                @UseSword.performed -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnUseSword;
+                @UseSword.canceled -= m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface.OnUseSword;
             }
             m_Wrapper.m_CharacterControllerActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -322,6 +359,9 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
                 @DuckAbility.started += instance.OnDuckAbility;
                 @DuckAbility.performed += instance.OnDuckAbility;
                 @DuckAbility.canceled += instance.OnDuckAbility;
+                @UseSword.started += instance.OnUseSword;
+                @UseSword.performed += instance.OnUseSword;
+                @UseSword.canceled += instance.OnUseSword;
             }
         }
     }
@@ -341,5 +381,6 @@ public partial class @CharacterMovement : IInputActionCollection2, IDisposable
         void OnAbility(InputAction.CallbackContext context);
         void OnSword2DVec(InputAction.CallbackContext context);
         void OnDuckAbility(InputAction.CallbackContext context);
+        void OnUseSword(InputAction.CallbackContext context);
     }
 }

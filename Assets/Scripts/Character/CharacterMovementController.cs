@@ -10,16 +10,16 @@ public class CharacterMovementController : MonoBehaviour
 
     [Header("Physics Settings")]
     [Header("Movement")]
-    [SerializeField] float walkingVelocity;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] private float walkingVelocity;
+    [SerializeField] private float rotationSpeed;
 
-    [SerializeField][Range(10, 30)] float dashVelocity;
-    [SerializeField][Range(0.1f, 1)] float dashDuration;
-    [SerializeField][Range(0f, 1f)] float friction;
+    [SerializeField][Range(10, 30)] private float dashVelocity;
+    [SerializeField][Range(0.1f, 1)] private float dashDuration;
+    [SerializeField][Range(0f, 1f)] private float friction;
 
     [Header("References")]
 
-    [SerializeField] Rigidbody movementRigidbody;
+    [SerializeField] private Rigidbody movementRigidbody;
 
 
     private void Awake()
@@ -29,42 +29,39 @@ public class CharacterMovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 moveDirection = _charInput.GetMovementVector();
+        var moveDirection = _charInput.GetMovementVector();
+        var targetVelocity = moveDirection.normalized * walkingVelocity;
+        var fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
         if (moveDirection != Vector2.zero)
         {
-
-            Vector2 targetVelocity = moveDirection.normalized * walkingVelocity;
-            Vector3 fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
             fixedVelocity.y = 0f;
             //Move rb
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
 
-            Vector3 movDir = movementRigidbody.velocity.normalized;
-            Quaternion rot = Quaternion.LookRotation(movDir, Vector3.up);
+            var movDir = movementRigidbody.velocity.normalized;
+            var rot = Quaternion.LookRotation(movDir, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            Vector3 fixedVelocity = -friction * movementRigidbody.velocity;
+            fixedVelocity = -friction * movementRigidbody.velocity;
             fixedVelocity.y = 0f;
             movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
         }
 
-        if (_isDashing)
+        if (!_isDashing) return;
+        //esto igual lo he roto lo arreglamos luego
+        targetVelocity = moveDirection.normalized * dashVelocity;
+
+        _dashElapsedTime += Time.deltaTime;
+        if (_dashElapsedTime >= dashDuration)
         {
-            //esto igual lo he roto lo arreglamos luego
-            Vector2 targetVelocity = moveDirection.normalized * dashVelocity;
-
-            _dashElapsedTime += Time.deltaTime;
-            if (_dashElapsedTime >= dashDuration)
-            {
-                _isDashing = false;
-            }
-
-            Vector3 fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
-            fixedVelocity.y = 0f;
-            movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
+            _isDashing = false;
         }
+
+        fixedVelocity = new Vector3(targetVelocity.x, 0f, targetVelocity.y) - movementRigidbody.velocity;
+        fixedVelocity.y = 0f;
+        movementRigidbody.AddForce(fixedVelocity, ForceMode.VelocityChange);
 
     }
 
@@ -76,6 +73,12 @@ public class CharacterMovementController : MonoBehaviour
         _isDashing = true;
         _dashElapsedTime = 0;
 
+    }
+
+    public Vector2 GetVelocity()
+    {
+        var velocity = movementRigidbody.velocity;
+        return new Vector2(velocity.x, velocity.z);
     }
 
 }
