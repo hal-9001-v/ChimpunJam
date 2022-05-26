@@ -10,7 +10,7 @@ public class CollisionItemAdder : MonoBehaviour
 
     CollisionInteractable _interactable => GetComponent<CollisionInteractable>();
     Inventory _inventory => FindObjectOfType<Inventory>();
-    
+
     EffectPrototypeProvider _effectProvider => FindObjectOfType<EffectPrototypeProvider>();
 
     InventoryItem _item;
@@ -18,11 +18,6 @@ public class CollisionItemAdder : MonoBehaviour
     private void Awake()
     {
         _interactable.enterEvent.AddListener(AddItem);
-
-        _item = _effectProvider.GetRandomItem();
-
-        _item.transform.position = transform.position + _itemOffset;
-        _item.transform.parent = transform;
     }
 
     void AddItem()
@@ -30,7 +25,19 @@ public class CollisionItemAdder : MonoBehaviour
         if (_inventory && _item)
         {
             _inventory.AddItem(_item);
+
+            _item = null;
         }
+
+
+    }
+
+    public void RestoreItem()
+    {
+        _item = _effectProvider.GetRandomItem();
+
+        _item.transform.position = transform.position + _itemOffset;
+        _item.transform.parent = transform;
     }
 
 }

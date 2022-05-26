@@ -10,14 +10,14 @@ public class Health : MonoBehaviour
     public HealthTag healthTag { get { return _healthTag; } }
 
     [Header("Values")]
-    [SerializeField][Range(0, 10)] float _maxHealth;
+    [SerializeField] [Range(0, 10)] float _maxHealth;
 
     public bool canGetHurt = true;
     public float currentHealth;
 
     public Action<Vector3, float, Transform> hurtAction;
     public Action<Vector3, float, Transform> deadAction;
-    
+
     public bool isAlive
     {
         get
@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
     public void Hurt(float dmg, Vector3 source, float push, Transform hitter)
     {
         if (canGetHurt)
-        {   
+        {
             //Debug.Log("HIT");
             currentHealth -= Mathf.Abs(dmg);
 
@@ -63,8 +63,9 @@ public class Health : MonoBehaviour
     }
 
     [ContextMenu("Matar")]
-    public void Kill(){
-        Hurt(1000, transform.position, 1000f, transform);
+    public void Kill()
+    {
+        Hurt(float.MaxValue, transform.position, 1000f, transform);
     }
 
 

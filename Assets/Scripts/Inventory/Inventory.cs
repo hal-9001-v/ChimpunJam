@@ -7,29 +7,29 @@ public class Inventory : MonoBehaviour
     [Header("References")]
     [SerializeField] FollowObject[] _followers;
 
-    Queue<InventoryItem> _itemQueue;
+
+    public Queue<InventoryItem> itemQueue;
 
     [Header("Settings")]
     [SerializeField] [Range(0.1f, 2)] float _cooldownTime;
-
     float _elapsedCooldown;
     bool _readyToUseItem;
 
     private void Awake()
     {
-        _itemQueue = new();
+        itemQueue = new();
     }
 
     [ContextMenu("Use Item")]
     public void UseItem()
     {
-        if (_readyToUseItem && _itemQueue.Count != 0)
+        if (_readyToUseItem && itemQueue.Count != 0)
         {
-            var firstItem = _itemQueue.Dequeue();
+            var firstItem = itemQueue.Dequeue();
 
             firstItem.UseItem();
 
-            _itemQueue.Enqueue(firstItem);
+            itemQueue.Enqueue(firstItem);
 
             AssignFollowersToItems();
 
@@ -38,24 +38,59 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public ItemEffect[] FlushEffects()
+    {
+        ItemEffect[] effects = new ItemEffect[itemQueue.Count];
+
+        var queueArray = itemQueue.ToArray();
+        for (int i = 0; i < effects.Length; i++)
+        {
+            effects[i] = queueArray[i].effect;
+        }
+        itemQueue.Clear();
+
+        return effects;
+    }
 
     public void AddItem(InventoryItem newItem)
     {
-        if (_itemQueue.Count >= _followers.Length)
+        if (itemQueue.Count >= _followers.Length)
         {
-            var oldItem = _itemQueue.Dequeue();
+            var oldItem = itemQueue.Dequeue();
             oldItem.gameObject.SetActive(false);
 
             Destroy(oldItem);
         }
 
-        _itemQueue.Enqueue(newItem);
+        itemQueue.Enqueue(newItem);
         AssignFollowersToItems();
+    }
+
+    public InventoryItem RemoveItem(int position)
+    {
+        if (position < 0 || position >= itemQueue.Count)
+        {
+            return null;
+        }
+
+        var itemArray = itemQueue.ToArray();
+        itemQueue.Clear();
+        for (int i = 0; i < itemArray.Length; i++)
+        {
+            if (i != position)
+            {
+                itemQueue.Enqueue(itemArray[i]);
+            }
+        }
+
+        AssignFollowersToItems();
+
+        return itemArray[position];
     }
 
     void AssignFollowersToItems()
     {
-        var queueArray = _itemQueue.ToArray();
+        var queueArray = itemQueue.ToArray();
         for (int i = 0; i < queueArray.Length - 1; i++)
         {
             queueArray[i].SetFollower(_followers[i], false);
