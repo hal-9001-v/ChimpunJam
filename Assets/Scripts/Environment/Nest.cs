@@ -13,6 +13,7 @@ public class Nest : MonoBehaviour
     [SerializeField] [Range(1, 30)] float _preparationTime;
     AreaHolder _areaHolder => GetComponent<AreaHolder>();
 
+    bool _preparing;
 
     private void Awake()
     {
@@ -21,7 +22,11 @@ public class Nest : MonoBehaviour
 
     void PrepareEgg()
     {
-        StartCoroutine(CountDown());
+        if (_preparing == false)
+        {
+            _preparing = true;
+            StartCoroutine(CountDown());
+        }
     }
 
     IEnumerator CountDown()
@@ -29,5 +34,6 @@ public class Nest : MonoBehaviour
         yield return new WaitForSeconds(_preparationTime);
 
         _effectProvider.RestoreItem();
+        _preparing = false;
     }
 }

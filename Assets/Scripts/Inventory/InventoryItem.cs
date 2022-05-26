@@ -11,6 +11,8 @@ public class InventoryItem : MonoBehaviour
 
     ItemEffect _effect => GetComponent<ItemEffect>();
 
+    public ItemEffect effect { get { return _effect; } }
+
     FollowObject _follow;
 
     bool _lerping;

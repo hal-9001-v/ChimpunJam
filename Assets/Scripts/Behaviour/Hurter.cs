@@ -21,6 +21,7 @@ public class Hurter : MonoBehaviour
 
     bool _collidersActive = true;
 
+
     private void Awake()
     {
         if (_attackColliders == null || _attackColliders.Length == 0)
@@ -37,7 +38,7 @@ public class Hurter : MonoBehaviour
     private void Hit(Transform source, Collider coll, Vector3 pos)
     {
         var health = coll.GetComponent<Health>();
-        if (coll.isTrigger == true && health)
+        if (health)
         {
             //Debug.Log("HURT");
             health.Hurt(_damage, pos, _push, source);
