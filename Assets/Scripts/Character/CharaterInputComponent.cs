@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class CharaterInputComponent : MonoBehaviour
 {
+
     private CharacterMovement _characterControls;
     private Vector2 _movementInputVector;
     private Vector2 _swordInputVector;
 
     private Inventory _inventory => FindObjectOfType<Inventory>();
+    private SwordController _swordController => FindObjectOfType<SwordController>();
 
 
     private void OnEnable()
@@ -38,29 +40,42 @@ public class CharaterInputComponent : MonoBehaviour
             _movementInputVector = Vector2.zero;
         };
 
-        _characterControls.CharacterControllerActionMap.Ability.performed += ctx =>{
+        _characterControls.CharacterControllerActionMap.Ability.performed += ctx =>
+        {
             FollowerAbility();
         };
 
-        _characterControls.CharacterControllerActionMap.DuckAbility.performed += ctx => {
+        _characterControls.CharacterControllerActionMap.DuckAbility.performed += ctx =>
+        {
             DuckAbility();
+        };
+
+        _characterControls.CharacterControllerActionMap.UseSword.performed += ctx =>
+        {
+            _swordController.EnableSword(true);
+        };
+
+        _characterControls.CharacterControllerActionMap.UseSword.canceled += ctx =>
+        {
+            _swordController.EnableSword(false);
         };
     }
 
-    private void DuckAbility(){
-        //CameraShaker.Instance.ShakeCam(5f, 5f, .3f);
-
+    private void DuckAbility()
+    {
         _inventory.UseItem();
-        
+
     }
 
-    private void FollowerAbility(){
+    private void FollowerAbility()
+    {
         Debug.Log("Follower Pium");
     }
 
 
-    public Vector2 GetMovementVector(){ return _movementInputVector;}
-    public Vector2 GetMouseInputVector(){ return _swordInputVector;}
+
+    public Vector2 GetMovementVector() { return _movementInputVector; }
+    public Vector2 GetMouseInputVector() { return _swordInputVector; }
 
 
 }
