@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5655196566812761266}
+  _timeWithNoMove: 0.3
 --- !u!114 &579975607381699727
 MonoBehaviour:
   m_ObjectHideFlags: 0

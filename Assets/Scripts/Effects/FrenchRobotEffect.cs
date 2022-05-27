@@ -6,6 +6,7 @@ using UnityEngine;
 public class FrenchRobotEffect : ItemEffect
 {
     [SerializeField] Animator _animator;
+    [SerializeField] [Range(0.1f, 1)] float _timeWithNoMove;
     Shooter _shooter => GetComponent<Shooter>();
     CharaterInputComponent _input;
 
@@ -14,6 +15,9 @@ public class FrenchRobotEffect : ItemEffect
     const string ShootTriggerKey = "Shoot";
     const string WalingBoolKey = "Walking";
 
+    float _noMoveElapsedTime;
+
+    int _frameCounter;
     public override void ApplyEffect()
     {
         var enemies = FindObjectsOfType<Enemy>();
@@ -47,20 +51,34 @@ public class FrenchRobotEffect : ItemEffect
 
     private void FixedUpdate()
     {
-        var direction = transform.position - _previousPosition;
-        if (direction.sqrMagnitude >= 0.1f)
+
+        if (_frameCounter == 10)
         {
-            _animator.SetBool(WalingBoolKey, true);
+            _frameCounter = 0;
 
-            direction.Normalize();
+            var direction = transform.position - _previousPosition;
+            if (direction.sqrMagnitude >= 0.1f)
+            {
+                _animator.SetBool(WalingBoolKey, true);
+                _noMoveElapsedTime = 0;
+            }
+            else
+            {
+                _noMoveElapsedTime += Time.fixedDeltaTime;
 
+                if (_noMoveElapsedTime > _timeWithNoMove)
+                {
+                    _animator.SetBool(WalingBoolKey, false);
+
+                }
+            }
+
+            _previousPosition = transform.position;
         }
         else
         {
-            _animator.SetBool(WalingBoolKey, false);
+            _frameCounter += 1;
         }
-
-        _previousPosition = transform.position;
     }
 
 
