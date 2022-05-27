@@ -52,18 +52,15 @@ public class FrenchRobotEffect : ItemEffect
         {
             _animator.SetBool(WalingBoolKey, true);
 
-            direction.y = 0;
-
             direction.Normalize();
 
-            transform.forward = direction;
-
-            _previousPosition = transform.position;
         }
         else
         {
             _animator.SetBool(WalingBoolKey, false);
         }
+
+        _previousPosition = transform.position;
     }
 
 

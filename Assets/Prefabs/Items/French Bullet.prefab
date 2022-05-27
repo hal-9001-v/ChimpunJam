@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3609225050139736503}
   - component: {fileID: 1340135514839814018}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: French Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _targetTag: 0
+  _targetTag: 1
 --- !u!33 &3609225050139736503
 MeshFilter:
   m_ObjectHideFlags: 0

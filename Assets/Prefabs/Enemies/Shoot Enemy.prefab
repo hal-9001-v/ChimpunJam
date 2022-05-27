@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawn: {fileID: 1402812189}
-  _projectilePrefab: {fileID: 6136581764916732865, guid: a5cbddcaa7464e74d81a99c9f61be4a8,
+  _projectilePrefab: {fileID: 6136581764916732865, guid: c1fdc4c9023bd134aa85d3e0d96e6bc1,
     type: 3}
   _numberOfBullets: 1
   _bulletDelay: 1

@@ -13,6 +13,10 @@ public class FollowChain : MonoBehaviour
     [SerializeField] [Range(0.01f, 1)] float _lerpFactor;
     [SerializeField] [Range(0.1f, 10)] float _minDistance;
 
+    [SerializeField] bool _lockXRotation;
+    [SerializeField] bool _lockYRotation;
+    [SerializeField] bool _lockZRotation;
+
     Rigidbody _rigidbody => GetComponent<Rigidbody>();
 
 
@@ -42,6 +46,15 @@ public class FollowChain : MonoBehaviour
             if (direction.magnitude > _minDistance)
             {
                 _slots[i].position = Vector3.Lerp(_slots[i].position, _slots[i - 1].position, _lerpFactor);
+
+                if (_lockXRotation)
+                    direction.x = 0;
+                if (_lockYRotation)
+                    direction.y = 0;
+                if (_lockZRotation)
+                    direction.z = 0;
+
+                direction.Normalize();
                 _slots[i].forward = Vector3.Lerp(_slots[i].forward, direction, _lerpFactor);
             }
         }
