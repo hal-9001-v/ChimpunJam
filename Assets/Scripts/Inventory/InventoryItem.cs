@@ -22,6 +22,7 @@ public class InventoryItem : MonoBehaviour
     float _lerpTargetTime;
     float _lerpElapsedTime;
 
+    public bool isNeeded;
 
     public void UseItem()
     {

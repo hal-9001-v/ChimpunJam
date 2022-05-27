@@ -14,6 +14,8 @@ public class Inventory : MonoBehaviour
     float _elapsedCooldown;
     bool _readyToUseItem;
 
+    EndGame _endGame => FindObjectOfType<EndGame>();
+
     private void Awake()
     {
         itemQueue = new();
@@ -63,6 +65,23 @@ public class Inventory : MonoBehaviour
 
         itemQueue.Enqueue(newItem);
         AssignFollowersToItems();
+
+        CheckVictory();
+    }
+
+    bool CheckVictory()
+    {
+        if (itemQueue.Count == 4)
+        {
+            foreach (var item in itemQueue)
+            {
+                if (item.isNeeded == false)
+                    return false;
+            }
+        }
+
+
+        return true;
     }
 
     public InventoryItem RemoveItem(int position)
@@ -94,7 +113,7 @@ public class Inventory : MonoBehaviour
             var queueArray = itemQueue.ToArray();
             for (int i = 0; i < queueArray.Length - 1; i++)
             {
-               queueArray[i].SetParent(_followChain.slots[i], false);
+                queueArray[i].SetParent(_followChain.slots[i], false);
             }
             queueArray[queueArray.Length - 1].SetParent(_followChain.slots[queueArray.Length - 1], true);
         }

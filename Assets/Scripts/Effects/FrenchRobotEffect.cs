@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Shooter))]
+[RequireComponent(typeof(MovementDetector))]
 public class FrenchRobotEffect : ItemEffect
 {
+    [Header("References")]
     [SerializeField] Animator _animator;
-    [SerializeField] [Range(0.1f, 1)] float _timeWithNoMove;
-    Shooter _shooter => GetComponent<Shooter>();
-    CharaterInputComponent _input;
 
-    Vector3 _previousPosition;
+    [Header("Settings")]
+    [SerializeField] [Range(0.1f, 1)] float _timeWithNoMove;
+
+    Shooter _shooter => GetComponent<Shooter>();
+    MovementDetector _movementDetector => GetComponent<MovementDetector>();
 
     const string ShootTriggerKey = "Shoot";
-    const string WalingBoolKey = "Walking";
+    const string WalkingBoolKey = "Walking";
 
-    float _noMoveElapsedTime;
-
-    int _frameCounter;
     public override void ApplyEffect()
     {
         var enemies = FindObjectsOfType<Enemy>();
@@ -49,35 +49,15 @@ public class FrenchRobotEffect : ItemEffect
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-
-        if (_frameCounter == 10)
+        if (_movementDetector.isMoving)
         {
-            _frameCounter = 0;
-
-            var direction = transform.position - _previousPosition;
-            if (direction.sqrMagnitude >= 0.1f)
-            {
-                _animator.SetBool(WalingBoolKey, true);
-                _noMoveElapsedTime = 0;
-            }
-            else
-            {
-                _noMoveElapsedTime += Time.fixedDeltaTime;
-
-                if (_noMoveElapsedTime > _timeWithNoMove)
-                {
-                    _animator.SetBool(WalingBoolKey, false);
-
-                }
-            }
-
-            _previousPosition = transform.position;
+            _animator.SetBool(WalkingBoolKey, true);
         }
         else
         {
-            _frameCounter += 1;
+            _animator.SetBool(WalkingBoolKey, false);
         }
     }
 

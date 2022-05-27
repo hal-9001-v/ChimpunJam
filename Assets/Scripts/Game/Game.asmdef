@@ -1,12 +1,7 @@
 {
-    "name": "Effects",
+    "name": "Game",
     "rootNamespace": "",
-    "references": [
-        "GUID:43c311cdb458adb4cb8f1ba70c51ebde",
-        "GUID:0b26c266487dff048a3491d587896e49",
-        "GUID:63b77211dcaa47b4594971504f510b81",
-        "GUID:e87e45dd84815f64f967706a6d17b6ee"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

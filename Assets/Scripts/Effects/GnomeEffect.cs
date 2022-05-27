@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MovementDetector))]
 public class GnomeEffect : ItemEffect
 {
-    [Header("Settings")]
-    [SerializeField] [Range(0.5f, 4)] float _defaultRandomDistance;
-    [SerializeField][Range(1, 5)] float _timeUntilExplosion;
-
+    [Header("References")]
+    [SerializeField] Animator _mockupAnimator;
+    [Space(5)]
+    [SerializeField] Animator _explosiveAnimator;
     [SerializeField] FollowObject _gnomeFollow;
     [SerializeField] Exploder _gnomeExploder;
     [SerializeField] Hider _gnomeHider;
 
+    [Header("Settings")]
+    [SerializeField] [Range(0.5f, 4)] float _defaultRandomDistance;
+    [SerializeField] [Range(1, 5)] float _timeUntilExplosion;
+
+    MovementDetector _movementDetector => GetComponent<MovementDetector>();
 
     Transform target;
 
@@ -19,8 +25,12 @@ public class GnomeEffect : ItemEffect
 
     Coroutine _countdownCoroutine;
 
+    const string WalkingBoolKey = "Walking";
+
     private void Awake()
     {
+        _explosiveAnimator.SetBool(WalkingBoolKey, true);
+
         _gnomeHider.Show(false);
         _gnomeFollow.stopFollowing = true;
     }
@@ -71,15 +81,27 @@ public class GnomeEffect : ItemEffect
         _countdownCoroutine = StartCoroutine(ExplosionCountdown());
     }
 
+    private void Update()
+    {
+        if (_movementDetector.isMoving)
+        {
+            _mockupAnimator.SetBool(WalkingBoolKey, true);
+        }
+        else
+        {
+            _mockupAnimator.SetBool(WalkingBoolKey, false);
+        }
+    }
+
     IEnumerator ExplosionCountdown()
     {
         yield return new WaitForSeconds(_timeUntilExplosion);
         _gnomeExploder.Explode();
         _gnomeHider.Show(false);
 
-       _gnomeFollow.transform.position = transform.position;
-       _gnomeFollow.transform.parent = transform;
-       _gnomeFollow.stopFollowing = true;
+        _gnomeFollow.transform.position = transform.position;
+        _gnomeFollow.transform.parent = transform;
+        _gnomeFollow.stopFollowing = true;
     }
 
 
