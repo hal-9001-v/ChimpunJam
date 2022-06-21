@@ -47,13 +47,7 @@ public class FollowChain : MonoBehaviour
             {
                 _slots[i].position = Vector3.Lerp(_slots[i].position, _slots[i - 1].position, _lerpFactor);
 
-                if (_lockXRotation)
-                    direction.x = 0;
-                if (_lockYRotation)
-                    direction.y = 0;
-                if (_lockZRotation)
-                    direction.z = 0;
-
+                direction.y = 0;
                 direction.Normalize();
                 _slots[i].forward = Vector3.Lerp(_slots[i].forward, direction, _lerpFactor);
             }

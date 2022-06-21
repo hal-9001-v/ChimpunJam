@@ -178,6 +178,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _lerpSpeed: 1
+  isNeeded: 0
 --- !u!1001 &2299446108013283190
 PrefabInstance:
   m_ObjectHideFlags: 0
