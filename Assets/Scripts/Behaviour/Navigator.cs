@@ -23,8 +23,8 @@ public class Navigator : MonoBehaviour
 
     float _desiredSpeed;
 
-    NavMeshAgent _navMeshAgent;
-    Rigidbody _rigidbody;
+    NavMeshAgent _navMeshAgent => GetComponent<NavMeshAgent>();
+    Rigidbody _rigidbody => GetComponent<Rigidbody>();
 
     Transform _target;
     //Used for an specific position with no changes
@@ -35,8 +35,7 @@ public class Navigator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _rigidbody = GetComponent<Rigidbody>();
+        
 
         _rigidbody.isKinematic = true;
 

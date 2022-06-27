@@ -12,6 +12,7 @@ public class CharaterInputComponent : MonoBehaviour
     private Inventory _inventory => FindObjectOfType<Inventory>();
     private SwordController _swordController => FindObjectOfType<SwordController>();
 
+    [SerializeField] Health _playerHealth;
 
     private void OnEnable()
     {
@@ -28,6 +29,11 @@ public class CharaterInputComponent : MonoBehaviour
     {
         _characterControls = new CharacterMovement();
         InitializeControls();
+
+        _playerHealth.deadAction += (v, f, p) =>
+        {
+            _characterControls.CharacterControllerActionMap.Disable();
+        };
     }
 
     private void InitializeControls()

@@ -9,6 +9,7 @@ public class Nest : MonoBehaviour
     [Header("References")]
     [SerializeField] CollisionItemAdder _effectProvider;
     [SerializeField] Transform _egg;
+    [SerializeField] Clock _clock;
 
     [Header("Settings")]
     [SerializeField] [Range(1, 30)] float _preparationTime;
@@ -19,8 +20,8 @@ public class Nest : MonoBehaviour
 
     bool _preparing;
 
+    public int eggsAvaliable = 0;
     
-
     private void Awake()
     {
         _originalSize = _egg.localScale;
@@ -29,13 +30,19 @@ public class Nest : MonoBehaviour
         _egg.localScale = Vector3.zero;
     }
 
+
+
     void PrepareEgg()
     {
-        if (_preparing == false)
+        if (_preparing == false && eggsAvaliable > 0)
         {
+            eggsAvaliable--;
+
             _preparing = true;
             StartCoroutine(GrowEgg());
             StartCoroutine(CountDown());
+
+            _clock.StartCount(_preparationTime);
         }
     }
 

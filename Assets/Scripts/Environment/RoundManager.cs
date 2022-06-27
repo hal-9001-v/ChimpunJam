@@ -1,16 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class RoundManager : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] TextMeshProUGUI _textMesh;
     [SerializeField] bool _onAwake;
     [SerializeField] bool _auto;
     [SerializeField] Round[] _rounds;
 
     EnemySpawner[] _spawners => FindObjectsOfType<EnemySpawner>();
+
+    Nest _nest => FindObjectOfType<Nest>();
 
     public int roundCount { get; private set; }
 
@@ -82,11 +87,14 @@ public class RoundManager : MonoBehaviour
         }
 
         roundCount++;
+        _nest.eggsAvaliable += 2;
 
         if (roundStartAction != null)
         {
             roundStartAction.Invoke(roundCount);
         }
+
+        _textMesh.text = "Round " + roundCount.ToString();
 
         StartCoroutine(Spawn(currentRound));
 

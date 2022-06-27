@@ -9,7 +9,7 @@ public class InertiaHurter : MonoBehaviour
     [Header("Settings")]
     [SerializeField] HealthTag _targetTag;
 
-    [SerializeField] [Range(1, 10)] float _damage;
+    [SerializeField] [Range(1, 10)] int _damage;
     [SerializeField] [Range(1, 20)] float _minimumSpeedForDamage;
     [SerializeField] [Range(1, 20)] float _thrust;
 

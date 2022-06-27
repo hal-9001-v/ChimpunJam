@@ -16,7 +16,7 @@ public class HitSpinner : MonoBehaviour
             transform.eulerAngles += Vector3.up * 5;
         };
 
-        _health.currentHealth = float.MaxValue;
+        _health.currentHealth = int.MaxValue;
     }
 
 }

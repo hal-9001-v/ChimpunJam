@@ -53,6 +53,11 @@ public class Inventory : MonoBehaviour
         return effects;
     }
 
+    public void RemoveItem()
+    {
+
+    }
+
     public void AddItem(InventoryItem newItem)
     {
         if (itemQueue.Count >= _followChain.slots.Length)
@@ -66,7 +71,10 @@ public class Inventory : MonoBehaviour
         itemQueue.Enqueue(newItem);
         AssignFollowersToItems();
 
-        CheckVictory();
+        if (CheckVictory())
+        {
+            _endGame.End();
+        }
     }
 
     bool CheckVictory()
@@ -78,6 +86,10 @@ public class Inventory : MonoBehaviour
                 if (item.isNeeded == false)
                     return false;
             }
+        }
+        else
+        {
+            return false;
         }
 
 

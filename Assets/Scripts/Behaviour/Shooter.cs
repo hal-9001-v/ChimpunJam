@@ -13,7 +13,7 @@ public class Shooter : MonoBehaviour
     [SerializeReference] [Range(1, 10)] int _numberOfBullets;
     [SerializeReference] [Range(0.1f, 1)] float _bulletDelay;
     [SerializeReference] [Range(1, 20)] float _bulletSpeed;
-    [SerializeReference] [Range(1, 20)] float _bulletDamage;
+    [SerializeReference] [Range(1, 20)] int _bulletDamage;
     [SerializeReference] [Range(1, 20)] float _bulletPush;
 
     Projectile[] _projectiles;

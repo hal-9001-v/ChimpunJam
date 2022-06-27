@@ -6,7 +6,9 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Hurter))]
 public class MeleeEnemy : Enemy
 {
-    [Header("Settings")] [SerializeField] [Range(1, 20)]
+    [Header("Settings")]
+    [SerializeField]
+    [Range(1, 20)]
     float _speed = 10;
 
     [SerializeField] [Range(0.5f, 5)] float _attackRange = 1;
@@ -15,7 +17,7 @@ public class MeleeEnemy : Enemy
     [SerializeField] [Range(0.1f, 1)] float _attackDuration;
     [SerializeField] [Range(0.1f, 1)] float _afterAttackTime;
 
-    [Header("References")] 
+    [Header("References")]
     [SerializeField] private VFXPlayer _confettiVFX;
     private Health _health => GetComponent<Health>();
     private Hurter _melee => GetComponent<Hurter>();
@@ -24,6 +26,8 @@ public class MeleeEnemy : Enemy
     EnemyTarget _target => FindObjectOfType<EnemyTarget>();
 
     protected RagdollMaker _ragdollMaker => GetComponentInChildren<RagdollMaker>();
+
+    [SerializeField] Animator _animator;
 
     bool _isAttacking;
     Coroutine _attackCoroutine;
@@ -39,7 +43,7 @@ public class MeleeEnemy : Enemy
     {
         if (_target)
         {
-            if (!_isAttacking)
+            if (!_isAttacking && _health.isAlive)
             {
                 _navigator.GoToPosition(_speed, _target.transform.position);
 
@@ -71,6 +75,7 @@ public class MeleeEnemy : Enemy
 
 
         _melee.EnableAttackColliders(true);
+        _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_attackDuration);
         _melee.EnableAttackColliders(false);
 
@@ -79,7 +84,7 @@ public class MeleeEnemy : Enemy
 
         _isAttacking = false;
     }
-    
+
     void Hurt(Vector3 source, float push, Transform hitter)
     {
         //Oof
@@ -87,7 +92,12 @@ public class MeleeEnemy : Enemy
 
     void Die(Vector3 source, float push, Transform hitter)
     {
-        //Destroy(gameObject);
+        if (_attackCoroutine != null)
+        {
+            StopCoroutine(_attackCoroutine);
+        }
+
+        //DisableEnemy();
         StartCoroutine(DieC());
     }
 

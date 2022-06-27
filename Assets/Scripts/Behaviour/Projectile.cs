@@ -17,8 +17,10 @@ public class Projectile : MonoBehaviour
     Collider[] _colliders;
     Renderer[] _renderers;
 
-    float _damage = 1;
+    int _damage = 1;
     float _push = 1;
+
+    bool _launched;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,10 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.forward = _rigidBody.velocity.normalized;
+        if (_launched)
+        {
+            transform.forward = _rigidBody.velocity.normalized;
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -52,23 +57,26 @@ public class Projectile : MonoBehaviour
         }
 
         _onHit.Invoke();
+        _launched = false;
         Hide();
 
     }
 
-    public void Launch(Vector3 startingPosition, Vector3 velocity, float damage, float push)
+    public void Launch(Vector3 startingPosition, Vector3 velocity, int damage, float push)
     {
         Show();
 
         _damage = damage;
         _push = push;
 
+        _launched = true;
+
         transform.position = startingPosition;
         _rigidBody.velocity = velocity;
 
     }
 
-    public void Launch(Vector3 startingPosition, float velocity, float damage, float push, Transform target)
+    public void Launch(Vector3 startingPosition, float velocity, int damage, float push, Transform target)
     {
         Launch(startingPosition, (target.position - startingPosition).normalized * velocity, damage, push);
     }

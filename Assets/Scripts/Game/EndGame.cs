@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
-    const int EndSceneIndex = 3;
+    const int EndSceneIndex = 2;
 
     public void End()
     {

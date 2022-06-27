@@ -15,6 +15,8 @@ public class CollisionItemAdder : MonoBehaviour
 
     InventoryItem _item;
 
+    DialogueChart _dialogue => FindObjectOfType<DialogueChart>();
+    
     private void Awake()
     {
         _interactable.enterEvent.AddListener(AddItem);
@@ -27,10 +29,19 @@ public class CollisionItemAdder : MonoBehaviour
             _inventory.AddItem(_item);
 
             _item = null;
+
+            SpawnRandomText();
         }
 
 
     }
+
+
+    void SpawnRandomText()
+    {
+        _dialogue.TypeText("What the duck?", null);
+    }
+
 
     public void RestoreItem()
     {

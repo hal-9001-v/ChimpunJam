@@ -10,19 +10,29 @@ public class Health : MonoBehaviour
     public HealthTag healthTag { get { return _healthTag; } }
 
     [Header("Values")]
-    [SerializeField] [Range(0, 10)] float _maxHealth;
+    [SerializeField] [Range(0, 10)] int _maxHealth;
+
+    public int maxHealth
+    {
+        get
+        {
+            return _maxHealth;
+        }
+    }
 
     public bool canGetHurt = true;
-    public float currentHealth;
+    public int currentHealth;
 
     public Action<Vector3, float, Transform> hurtAction;
     public Action<Vector3, float, Transform> deadAction;
+
+    public Action healAction;
 
     public bool isAlive
     {
         get
         {
-            return currentHealth <= 0;
+            return currentHealth > 0;
         }
         private set
         {
@@ -36,12 +46,12 @@ public class Health : MonoBehaviour
 
     }
 
-    public void Hurt(float dmg, Vector3 source, float push, Transform hitter)
+    public void Hurt(int dmg, Vector3 source, float push, Transform hitter)
     {
         if (canGetHurt)
         {
             //Debug.Log("HIT");
-            currentHealth -= Mathf.Abs(dmg);
+            currentHealth -= Math.Abs(dmg);
 
             if (currentHealth > 0)
             {
@@ -62,12 +72,21 @@ public class Health : MonoBehaviour
 
     }
 
+    public void Heal(int points)
+    {
+        _maxHealth += points;
+        currentHealth += points;
+
+        if (healAction != null)
+        {
+            healAction.Invoke();
+        }
+    }
+
     [ContextMenu("Matar")]
     public void Kill()
     {
-        Hurt(float.MaxValue, transform.position, 1000f, transform);
+        Hurt(int.MaxValue, transform.position, 1000f, transform);
     }
-
-
 
 }

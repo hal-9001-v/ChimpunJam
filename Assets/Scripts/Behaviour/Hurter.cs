@@ -15,9 +15,9 @@ public class Hurter : MonoBehaviour
 
     // Cuando colidee cosa de melee con cosa de health se llama a hurt()
     [Header("Hit Values")]
-    [SerializeField] [Range(0, 10)] private float _damage;
+    [SerializeField] [Range(0, 10)] private int _damage;
     [SerializeField] [Range(0, 10)] private float _push;
-    public Action hitAction;
+    public Action<Collider> hitAction;
 
     bool _collidersActive = true;
 
@@ -46,7 +46,7 @@ public class Hurter : MonoBehaviour
             health.Hurt(_damage, pos, _push, source);
 
             if (hitAction != null)
-                hitAction.Invoke();
+                hitAction.Invoke(coll);
 
         }
     }

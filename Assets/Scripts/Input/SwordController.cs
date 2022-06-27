@@ -28,11 +28,20 @@ public class SwordController : MonoBehaviour
 
     Coroutine _modifyCoroutine;
 
+    HitMarker _hitMarker => FindObjectOfType<HitMarker>();
+
     private void Awake()
     {
         _targetStartingPosition = _ikTarget.localPosition;
 
-        _hurter.hitAction += UseEffect;
+        _hurter.hitAction += (coll) =>
+        {
+            UseEffect();
+        };
+        _hurter.hitAction += (coll) =>
+        {
+            _hitMarker.Hit(transform, coll);
+        };
 
         EnableSword(false);
     }

@@ -10,7 +10,7 @@ public class Sacrifice : MonoBehaviour
 
     [SerializeField] Health _playerHealth;
 
-    [SerializeField] float _moreHealth = 2;
+    [SerializeField] int _moreHealth = 2;
 
     enum SacrificeType
     {
@@ -38,9 +38,9 @@ public class Sacrifice : MonoBehaviour
     {
         if (_inventory.itemQueue.Count != 0)
         {
-            _inventory.RemoveItem(0);
+            Destroy(_inventory.RemoveItem(0).gameObject);
 
-            _playerHealth.currentHealth += _moreHealth;
+            _playerHealth.Heal(_moreHealth);
         }
     }
     void GiveCombinedEffects()
